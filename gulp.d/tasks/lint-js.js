@@ -1,12 +1,12 @@
 'use strict'
 
-const eslint = require('gulp-eslint')
+const eslint = require('gulp-eslint-new')
 const vfs = require('vinyl-fs')
 
 module.exports = (files) => (done) =>
   vfs
     .src(files)
-    .pipe(eslint())
+    .pipe(eslint({configType: 'flat'}))
     .pipe(eslint.format())
     .pipe(eslint.failAfterError())
     .on('error', done)
