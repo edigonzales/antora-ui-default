@@ -21,6 +21,7 @@ export default [
       'max-len': [1, 120, 2],
       'spaced-comment': 'off',
       radix: ['error', 'always'],
+      'no-var': 'off'
     },
   },
 ]
