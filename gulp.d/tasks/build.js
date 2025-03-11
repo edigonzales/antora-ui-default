@@ -36,7 +36,7 @@ module.exports = (src, dest, preview) => () => {
       }),
     postcssUrl([
       {
-        filter: (asset) => new RegExp('^[~][^/]*(?:font|typeface)[^/]*/.*/files/.+[.](?:ttf|woff2?)$').test(asset.url),
+        filter: (asset) => /'^[~][^/]*(?:font|typeface)[^/]*\/.*\/files\/.+[.](?:ttf|woff2?)$/.test(asset.url),
         url: (asset) => {
           const relpath = asset.pathname.slice(1)
           const abspath = require.resolve(relpath)
@@ -54,7 +54,8 @@ module.exports = (src, dest, preview) => () => {
     autoprefixer,
     preview
       ? () => {}
-      : (css, result) => cssnano({ preset: 'default' })(css, result).then(() => postcssPseudoElementFixer(css, result)),
+      : (css, result) => cssnano({ preset: 'default' })
+          .process(css, result).then(() => postcssPseudoElementFixer(css, result)),
   ]
 
   return merge(
@@ -84,7 +85,7 @@ module.exports = (src, dest, preview) => () => {
         : imagemin(
           [
             imagemin.gifsicle(),
-            imagemin.jpegtran(),
+            imagemin.mozjpeg(),
             imagemin.optipng(),
             imagemin.svgo({
               plugins: [
