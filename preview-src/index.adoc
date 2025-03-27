@@ -6,6 +6,7 @@ Author Name
 :!table-caption:
 //:page-role: -toc
 :page-pagination:
+:experimental:
 
 [.float-group]
 --
@@ -195,6 +196,8 @@ At ornatus splendide sed, phaedrum omittantur usu an, vix an noster voluptatibus
 
 * [ ] todo
 * [x] done!
+
+Showing a gear icon: icon:gear[]
 
 Vis veri graeci legimus ad.
 
