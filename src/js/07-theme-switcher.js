@@ -2,51 +2,33 @@
   'use strict'
 
   const userTheme = window.localStorage.getItem('theme')
-  const systemThemeIsDark = window.matchMedia('(prefers-color-scheme: dark)').matches
-  const themeLight = 'theme-light'
-  const themeDark = 'theme-dark'
-  const bodyClasses = document.body.classList
   const themeCurrentImage = document.querySelector('.theme-current')
-  const colorScheme = document.getElementById('colorScheme')
+
+  function theme (t) {
+    themeCurrentImage.src = '/_/img/theme-' + t + '.svg'
+    document.documentElement.dataset.theme = t
+  }
 
   if (userTheme) {
+    console.log(document)
     // User set theme manually
     switch (userTheme) {
       case 'dark': {
-        // bodyClasses.add(themeDark)
-        // bodyClasses.remove(themeLight)
-        colorScheme.setAttribute('content', 'dark')
-        themeCurrentImage.src = '/_/img/theme-dark.svg'
+        theme('dark')
         break
       }
       case 'light': {
-        // bodyClasses.add(themeLight)
-        // bodyClasses.remove(themeDark)
-        colorScheme.setAttribute('content', 'light')
-        themeCurrentImage.src = '/_/img/theme-light.svg'
+        theme('light')
         break
       }
       default: {
-        // bodyClasses.remove(themeLight)
-        // bodyClasses.remove(themeDark)
-        colorScheme.setAttribute('content', '')
-        themeCurrentImage.src = '/_/img/theme-system.svg'
+        theme('system')
         break
       }
     }
   } else {
-    // User don't set theme manually
-    if (systemThemeIsDark) {
-      // system theme is dark
-      // bodyClasses.add(themeDark)
-      // bodyClasses.remove(themeLight)
-      themeCurrentImage.src = '/_/img/theme-dark.svg'
-    } else {
-      // used system theme
-      // bodyClasses.remove(themeLight)
-      // bodyClasses.remove(themeDark)
-      themeCurrentImage.src = '/_/img/theme-system.svg'
-    }
+    // used system theme
+    themeCurrentImage.src = '/_/img/theme-system.svg'
   }
 
   const toggle = document.querySelector('.themes .theme-menu-toggle')
@@ -65,29 +47,18 @@
 
   function switchTheme (event) {
     const newTheme = this.dataset.theme
-    const bodyClasses = document.body.classList
+
+    theme(newTheme)
 
     if (newTheme === 'dark') {
-      // bodyClasses.add(themeDark)
-      // bodyClasses.remove(themeLight)
-      colorScheme.setAttribute('content', 'dark')
-      themeCurrentImage.src = '/_/img/theme-dark.svg'
       window.localStorage.setItem('theme', 'dark')
     }
 
     if (newTheme === 'light') {
-      // bodyClasses.add(themeLight)
-      // bodyClasses.remove(themeDark)
-      colorScheme.setAttribute('content', 'light')
-      themeCurrentImage.src = '/_/img/theme-light.svg'
       window.localStorage.setItem('theme', 'light')
     }
 
     if (newTheme === 'system') {
-      // bodyClasses.remove(themeLight)
-      // bodyClasses.remove(themeDark)
-      colorScheme.setAttribute('content', '')
-      themeCurrentImage.src = '/_/img/theme-system.svg'
       window.localStorage.removeItem('theme')
     }
   }
@@ -96,10 +67,5 @@
   const themeSwitches = document.querySelectorAll('.theme-menu .theme')
   themeSwitches.forEach((themeSwitch) => {
     themeSwitch.addEventListener('click', switchTheme)
-  })
-
-  // Watch system theme changes
-  window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', ({ matches }) => {
-    console.log(matches)
   })
 })()
