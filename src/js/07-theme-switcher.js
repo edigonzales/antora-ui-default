@@ -1,11 +1,15 @@
 (function () {
   'use strict'
 
+  const config = (document.getElementById('site-script') || { dataset: {} })
+    .dataset
+  const uiRootPath =
+    (config.uiRootPath == null ? window.uiRootPath : config.uiRootPath) || '.'
   const userTheme = window.localStorage.getItem('theme')
   const themeCurrentImage = document.querySelector('.theme-current')
 
   function theme (t) {
-    themeCurrentImage.src = '/_/img/theme-' + t + '.svg'
+    themeCurrentImage.src = uiRootPath + '/img/theme-' + t + '.svg'
     document.documentElement.dataset.theme = t
   }
 
@@ -21,14 +25,14 @@
         break
       }
       default: {
-        themeCurrentImage.src = '/_/img/theme-system.svg'
+        themeCurrentImage.src = uiRootPath + '/img/theme-system.svg'
         delete document.documentElement.dataset.theme
         break
       }
     }
   } else {
     // used system theme
-    themeCurrentImage.src = '/_/img/theme-system.svg'
+    themeCurrentImage.src = uiRootPath + '/img/theme-system.svg'
   }
 
   const toggle = document.querySelector('.themes .theme-menu-toggle')
@@ -60,7 +64,7 @@
 
     if (newTheme === 'system') {
       window.localStorage.removeItem('theme')
-      themeCurrentImage.src = '/_/img/theme-system.svg'
+      themeCurrentImage.src = uiRootPath + '/img/theme-system.svg'
       delete document.documentElement.dataset.theme
     }
   }
