@@ -10,7 +10,6 @@
   }
 
   if (userTheme) {
-    console.log(document)
     // User set theme manually
     switch (userTheme) {
       case 'dark': {
@@ -22,7 +21,8 @@
         break
       }
       default: {
-        theme('system')
+        themeCurrentImage.src = '/_/img/theme-system.svg'
+        delete document.documentElement.dataset.theme
         break
       }
     }
@@ -48,18 +48,20 @@
   function switchTheme (event) {
     const newTheme = this.dataset.theme
 
-    theme(newTheme)
-
     if (newTheme === 'dark') {
       window.localStorage.setItem('theme', 'dark')
+      theme('dark')
     }
 
     if (newTheme === 'light') {
       window.localStorage.setItem('theme', 'light')
+      theme('light')
     }
 
     if (newTheme === 'system') {
       window.localStorage.removeItem('theme')
+      themeCurrentImage.src = '/_/img/theme-system.svg'
+      delete document.documentElement.dataset.theme
     }
   }
 
