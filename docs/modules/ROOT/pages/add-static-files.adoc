@@ -225,3 +225,7 @@ Let's update the [.path]_src/partials/head-icons.hbs_ partial to reference a pro
 
 Rebuild the UI with `gulp bundle`.
 You should now see that your site has a favicon image that's provided by the UI bundle.
+
+== Notes
+
+During the UI build process, all files are collected into a build root, which is then zipped into the UI bundle file. Static files and folders are treated specially because they end up in the bundle's root rather than the static folder. When Antora builds the documentation using the zipped UI, it copies all the static files and folders defined in the `ui.yml` to the site's root and static files not defined in `ui.yml` to the UI output directory defined in Antora.
