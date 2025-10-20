@@ -120,6 +120,19 @@ Execute these commands to validate and build your site:
    --clean \
    antora-playbook.yml
 
+.CLI prompt in a literal block
+....
+$ echo "Voila!"
+$ echo "and again!"
+....
+
+.CLI prompt in a literal block with substitutions
+[subs="+quotes"]
+....
+$ echo "Voila!"
+$ *echo "and now in bold!"*
+....
+
 Cum dicat #putant# ne.
 Est in <<inline,reque>> homero principes, meis deleniti mediocrem ad has.
 Altera atomorum his ex, has cu elitr melius propriae.
