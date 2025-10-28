@@ -6,6 +6,7 @@ Author Name
 :!table-caption:
 //:page-role: -toc
 :page-pagination:
+:page-nav-expand-all:
 
 [.float-group]
 --

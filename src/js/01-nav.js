@@ -7,7 +7,6 @@
   var navToggle = document.querySelector('.nav-toggle')
   if (!navContainer && (!navToggle || (navToggle.hidden = true))) return
   var nav = navContainer.querySelector('.nav')
-  var navMenuToggle = navContainer.querySelector('.nav-menu-toggle')
 
   navToggle.addEventListener('click', showNav)
   navContainer.addEventListener('click', trapEvent)
@@ -15,6 +14,18 @@
   var menuPanel = navContainer.querySelector('[data-panel=menu]')
   if (!menuPanel) return
   var explorePanel = navContainer.querySelector('[data-panel=explore]')
+
+  var expandable = menuPanel.querySelector('.nav-item-toggle')
+  var navMenuToggle = navContainer.querySelector('.nav-menu-toggle')
+
+  if (expandable && navMenuToggle) {
+    navMenuToggle.style.display = ''
+    if (navMenuToggle.classList.contains('is-active')) {
+      find(menuPanel, '.nav-item > .nav-item-toggle').forEach(function (btn) {
+        btn.parentElement.classList.add('is-active')
+      })
+    }
+  }
 
   var currentPageItem = menuPanel.querySelector('.is-current-page')
   var originalPageItem = currentPageItem
@@ -25,30 +36,30 @@
     menuPanel.scrollTop = 0
   }
 
-  find(menuPanel, '.nav-item-toggle').forEach(function (btn) {
-    var li = btn.parentElement
-    btn.addEventListener('click', toggleActive.bind(li))
-    var navItemSpan = findNextElement(btn, '.nav-text')
-    if (navItemSpan) {
-      navItemSpan.style.cursor = 'pointer'
-      navItemSpan.addEventListener('click', toggleActive.bind(li))
-    }
-  })
-
-  if (navMenuToggle && menuPanel.querySelector('.nav-item-toggle')) {
-    navMenuToggle.style.display = ''
-    navMenuToggle.addEventListener('click', function () {
-      var collapse = !this.classList.toggle('is-active')
-      find(menuPanel, '.nav-item > .nav-item-toggle').forEach(function (btn) {
-        collapse ? btn.parentElement.classList.remove('is-active') : btn.parentElement.classList.add('is-active')
-      })
-      if (currentPageItem) {
-        if (collapse) activateCurrentPath(currentPageItem)
-        scrollItemToMidpoint(menuPanel, currentPageItem.querySelector('.nav-link'))
-      } else {
-        menuPanel.scrollTop = 0
+  if (expandable) {
+    find(menuPanel, '.nav-item-toggle').forEach(function (btn) {
+      var li = btn.parentElement
+      btn.addEventListener('click', toggleActive.bind(li))
+      var navItemSpan = findNextElement(btn, '.nav-text')
+      if (navItemSpan) {
+        navItemSpan.style.cursor = 'pointer'
+        navItemSpan.addEventListener('click', toggleActive.bind(li))
       }
     })
+    if (navMenuToggle) {
+      navMenuToggle.addEventListener('click', function () {
+        var collapse = !this.classList.toggle('is-active')
+        find(menuPanel, '.nav-item > .nav-item-toggle').forEach(function (btn) {
+          collapse ? btn.parentElement.classList.remove('is-active') : btn.parentElement.classList.add('is-active')
+        })
+        if (currentPageItem) {
+          if (collapse) activateCurrentPath(currentPageItem)
+          scrollItemToMidpoint(menuPanel, currentPageItem.querySelector('.nav-link'))
+        } else {
+          menuPanel.scrollTop = 0
+        }
+      })
+    }
   }
 
   if (explorePanel) {
