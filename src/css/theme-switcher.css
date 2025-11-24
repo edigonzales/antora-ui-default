@@ -1,0 +1,69 @@
+.themes {
+  margin: 0 0.2rem 0 auto;
+  position: relative;
+  line-height: 1;
+}
+
+@media screen and (min-width: 1024px) {
+  .themes {
+    margin-right: 0.7rem;
+  }
+}
+
+.themes .theme-menu-toggle {
+  color: inherit;
+  background: url(../img/chevron.svg) no-repeat;
+  background-position: right 0.5rem top 50%;
+  background-size: auto 0.75em;
+  border: none;
+  outline: none;
+  line-height: inherit;
+  padding: 0.5rem 1.5rem 0.5rem 0.5rem;
+  position: relative;
+  z-index: var(--z-index-page-version-menu);
+}
+
+.themes .theme-menu {
+  display: flex;
+  min-width: 100%;
+  flex-direction: column;
+  align-items: flex-start;
+  background:
+    linear-gradient(
+      to bottom,
+      var(--page-version-menu-background) 0%,
+      var(--page-version-menu-background) 100%
+    )
+    no-repeat;
+  padding: 1.5rem 0.5rem 0.5rem 0.5rem;
+  position: absolute;
+  top: 0;
+  right: 0;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.themes:not(.is-active) .theme-menu {
+  display: none;
+}
+
+.themes .theme {
+  display: block;
+  padding-top: 0.5rem;
+}
+
+.themes .theme:hover {
+  cursor: pointer;
+}
+
+.themes .theme:hover span {
+  text-decoration: underline;
+}
+
+.theme-icon {
+  width: 0.75em;
+  height: 0.75em;
+  margin-right: 0.5em;
+  flex-shrink: 0;
+  line-height: 0.75em;
+}

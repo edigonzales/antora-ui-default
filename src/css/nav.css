@@ -99,7 +99,7 @@
 }
 
 .nav-menu-toggle {
-  background: transparent url(../img/octicons-16.svg#view-unfold) no-repeat center / 100% 100%;
+  background: transparent url(../img/unfold.svg) no-repeat center / 100% 100%;
   border: none;
   float: right;
   height: 1em;
@@ -114,7 +114,7 @@
 }
 
 .nav-menu-toggle.is-active {
-  background-image: url(../img/octicons-16.svg#view-fold);
+  background-image: url(../img/fold.svg);
 }
 
 .nav-panel-menu.is-active:hover .nav-menu-toggle {

@@ -1,0 +1,21 @@
+{{#if page.themes}}
+<div class="themes">
+  <button class="theme-menu-toggle" title="Change theme">
+    <img class="theme-icon theme-current" src="_/img/theme-system.svg">
+      <span>Theme</span></button>
+  <div class="theme-menu">
+    <div class="theme" data-theme="dark">
+      <img class="theme-icon" src="/_/img/theme-dark.svg"/>
+      <span>Dark</span>
+    </div>
+    <div class="theme" data-theme="light">
+      <img class="theme-icon" src="/_/img/theme-light.svg"/>
+      <span>Light</span>
+    </div>
+    <div class="theme theme-system" data-theme="system">
+      <img class="theme-icon" src="/_/img/theme-system.svg">
+        <span>System</span>
+    </div>
+  </div>
+</div>
+{{/if}}
